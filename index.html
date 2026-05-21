@@ -53,6 +53,7 @@
 
         canvas {
             max-width: 100%;
+            width: 100%;
             height: auto;
             display: block;
         }
@@ -244,7 +245,7 @@
             </div>
 
             <!-- Canvas Container -->
-            <div class="w-full overflow-y-auto flex-1 flex justify-center bg-gray-200 p-4 rounded-xl border border-gray-300 shadow-inner min-h-[500px] max-h-[80vh] lg:h-auto custom-scrollbar">
+            <div class="w-full overflow-y-auto overflow-x-hidden flex-1 flex justify-center bg-gray-200 p-4 rounded-xl border border-gray-300 shadow-inner min-h-[500px] max-h-[80vh] lg:h-auto custom-scrollbar">
                 <canvas id="invoiceCanvas"></canvas>
             </div>
         </div>
@@ -307,15 +308,9 @@
         let loadedLogoImg = null;
 
         function setupCanvasResolution() {
-            const isMobile = window.innerWidth < 768;
-
-            if (isMobile) {
-                canvas.width = 1240;
-                canvas.height = 1754;
-            } else {
-                canvas.width = 2480;
-                canvas.height = 3508;
-            }
+            // Selalu pakai resolusi A4 penuh — CSS width:100% yang handle scaling di mobile
+            canvas.width = 2480;
+            canvas.height = 3508;
         }
 
         function checkCompatibility() {
@@ -477,7 +472,7 @@
             const textMuted = '#6b7280';
 
             ctx.save();
-            const scaleFactor = window.innerWidth < 768 ? 2 : 3;
+            const scaleFactor = 3;
             ctx.scale(scaleFactor, scaleFactor); 
 
             const marginX = 60;
