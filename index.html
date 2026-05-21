@@ -252,10 +252,6 @@
 
     <script>
 
-        
-        
-
-       
         // Data Awal
         let invoiceData = {
             invoiceNumber: "A-10200044",
@@ -776,6 +772,22 @@
             ctx.restore(); 
         }
 
+        function createHighResCanvas() {
+
+            const exportCanvas = document.createElement('canvas');
+
+            exportCanvas.width = 2480;
+            exportCanvas.height = 3508;
+
+            const exportCtx = exportCanvas.getContext('2d');
+
+            if (!exportCtx) return null;
+
+            drawInvoiceToContext(exportCtx, exportCanvas);
+
+            return exportCanvas;
+        }
+        
         window.onload = function() {
             const savedData = localStorage.getItem('savedInvoiceData');
             if (savedData) {
@@ -879,8 +891,6 @@
             printWin.document.write(windowContent);
             printWin.document.close();
         }
-
-       
 
         function debounce(func, delay) {
             let timeout;
